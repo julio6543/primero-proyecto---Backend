@@ -28,16 +28,61 @@ class ProductManager {
 
         return product;
     }
+
+    updateProduct(id, updatedFields) {
+        const productIndex = this.products.findIndex(product => product.id === id);
+        if (productIndex === -1) {
+            throw new Error('Producto no encontrado');
+        }
+
+
+        this.products[productIndex] = { ...this.products[productIndex], ...updatedFields };
+
+        return this.products[productIndex];
+    }
+
+    deleteProduct(id) {
+        const productIndex = this.products.findIndex(product => product.id === id);
+        if (productIndex === -1) {
+            throw new Error('Producto no encontrado');
+        }
+
+
+        this.products.splice(productIndex, 1);
+    }
 }
+
 
 const productManager = new ProductManager();
 
+
 console.log(productManager.getProducts());
 
-productManager.addProduct("Procesador RYZEN 7-1700", "Procesador de 7ma generación, 6 núcleos, 6 HILOS", 350, "imagen_procesador_R7",);
+
+productManager.addProduct("producto ", "Este es un producto ", 200, "Sin imagen", "jk94", 25);
+
+
+console.log(productManager.getProducts());
+
 
 try {
     console.log(productManager.getProductById(productManager.getProducts()[0].id));
 } catch (error) {
-    console.error('¡Ups, ocurrió un error!');
+    console.error('¡Ups, ocurrió un error al obtener el producto por ID!');
+}
+
+
+try {
+    productManager.updateProduct(productManager.getProducts()[0].id, { price: 250 });
+    console.log(productManager.getProducts());
+} catch (error) {
+    console.error('¡Ups, ocurrió un error al actualizar el producto!');
+}
+
+
+try {
+    productManager.deleteProduct(productManager.getProducts()[0].id);
+    console.log(productManager.getProducts());
+} catch (error) {
+    console.error('¡Ups, ocurrió un error al eliminar el producto!');
 }
