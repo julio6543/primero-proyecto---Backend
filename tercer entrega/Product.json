@@ -1,0 +1,20 @@
+[
+    {
+        "id": "_ncf1asmz9",
+        "title": "Laptop",
+        "description": "Laptop DELL .",
+        "price": 1200,
+        "thumbnail": "laptop.jpg",
+        "code": "hp001",
+        "stock": 10
+    },
+    {
+        "id": "_kc7z3tjss",
+        "title": "PC Gamer Red Dragon",
+        "description": "Potente PC de escritorio diseñado para juegos de alta gama con Ryzen 9 y RTX 3080.",
+        "price": 2500,
+        "thumbnail": "pc_gamer.jpg",
+        "code": "awr10",
+        "stock": 5
+    }
+]

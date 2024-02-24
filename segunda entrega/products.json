@@ -1,0 +1,11 @@
+[
+  {
+    "title": "laptop",
+    "description": "Laptop DELL.",
+    "price": 1200,
+    "thumbnail": "laptop.jpg",
+    "code": "hp001",
+    "stock": 10,
+    "id": 1
+  }
+]
