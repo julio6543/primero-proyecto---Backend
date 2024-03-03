@@ -1,53 +1,77 @@
-const fs = require('fs');
-
+const fs = require('fs').promises;
+const path = require('path');
 
 class ProductManager {
     constructor(filePath) {
         this.filePath = filePath;
     }
 
-    addProduct(product) {
-        let products = this.getProducts();
-        product.id = products.length > 0 ? products[products.length - 1].id + 1 : 1;
-        products.push(product);
-        this.saveProducts(products);
-        return product.id;
-    }
-
-    getProducts() {
+    async addProduct(product) {
         try {
-            const data = fs.readFileSync(this.filePath, 'utf-8');
-            return JSON.parse(data);
+            const products = await this.getProducts();
+            const lastProductId = products.length > 0 ? products[products.length - 1].id : 0;
+            product.id = lastProductId + 1;
+            products.push(product);
+            await this.saveProducts(products);
+            return product.id;
         } catch (error) {
-            return [];
+            console.error('Error adding product:', error);
+            throw error;
         }
     }
 
-    getProductById(id) {
-        const products = this.getProducts();
+    async getProducts() {
+        try {
+            const data = await fs.readFile(this.filePath, 'utf-8');
+            return JSON.parse(data);
+        } catch (error) {
+            if (error.code === 'ENOENT') {
+                return [];
+            }
+            throw error;
+        }
+    }
+
+    async getProductById(id) {
+        const products = await this.getProducts();
         return products.find(product => product.id === id);
     }
 
-    updateProduct(id, updatedFields) {
-        let products = this.getProducts();
-        let index = products.findIndex(product => product.id === id);
-        if (index !== -1) {
-            products[index] = { ...products[index], ...updatedFields };
-            this.saveProducts(products);
-            return true;
+    async updateProduct(id, updatedFields) {
+        try {
+            let products = await this.getProducts();
+            const index = products.findIndex(product => product.id === id);
+            if (index !== -1) {
+                products[index] = { ...products[index], ...updatedFields };
+                await this.saveProducts(products);
+                return true;
+            }
+            return false;
+        } catch (error) {
+            console.error('Error updating product:', error);
+            throw error;
         }
-        return false;
     }
 
-    deleteProduct(id) {
-        let products = this.getProducts();
-        let filteredProducts = products.filter(product => product.id !== id);
-        this.saveProducts(filteredProducts);
+    async deleteProduct(id) {
+        try {
+            let products = await this.getProducts();
+            products = products.filter(product => product.id !== id);
+            await this.saveProducts(products);
+        } catch (error) {
+            console.error('Error deleting product:', error);
+            throw error;
+        }
     }
 
-    saveProducts(products) {
-        fs.writeFileSync(this.filePath, JSON.stringify(products, null, 2));
+    async saveProducts(products) {
+        try {
+            await fs.writeFile(this.filePath, JSON.stringify(products, null, 2));
+        } catch (error) {
+            console.error('Error saving products:', error);
+            throw error;
+        }
     }
 }
 
-module.exports = ProductManager;
+module.exports = ProductManager;

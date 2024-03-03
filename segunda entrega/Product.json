@@ -1,20 +1,20 @@
-[
-    {
-        "id": "_ncf1asmz9",
-        "title": "Laptop",
-        "description": "Laptop DELL .",
-        "price": 1200,
-        "thumbnail": "laptop.jpg",
-        "code": "hp001",
-        "stock": 10
-    },
-    {
-        "id": "_kc7z3tjss",
-        "title": "PC Gamer Red Dragon",
-        "description": "Potente PC de escritorio diseñado para juegos de alta gama con Ryzen 9 y RTX 3080.",
-        "price": 2500,
-        "thumbnail": "pc_gamer.jpg",
-        "code": "awr10",
-        "stock": 5
-    }
-]
+    [
+        {
+        "id": 1,
+        "title": "Tarjeta Gráfica NVIDIA GeForce RTX 3080",
+        "description": "Tarjeta gráfica de alta gama para gaming y aplicaciones profesionales.",
+        "price": 899.99,
+        "thumbnail": "rtx3080.jpg",
+        "code": "NVDR3080",
+        "stock": 50
+        },
+        {
+        "id": 2,
+        "title": "Procesador AMD Ryzen 9 5900X",
+        "description": "Procesador de 12 núcleos y 24 hilos para máximo rendimiento en gaming y tareas multitarea.",
+        "price": 999.99,
+        "thumbnail": "ryzen5900x.jpg",
+        "code": "AMD5900X",
+        "stock": 60
+        }
+    ]

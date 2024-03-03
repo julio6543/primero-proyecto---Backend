@@ -5,12 +5,12 @@ async function main() {
         const productManager = new ProductManager('products.json');
 
         const newProductId = await productManager.addProduct({
-            title: 'laptop',
-            description: 'Laptop DELL.',
-            price: 1200,
-            thumbnail: 'laptop.jpg',
-            code: 'hp001',
-            stock: 10
+            title: 'NVIDIA GeForce RTX 3080',
+            description: 'La tarjeta gráfica NVIDIA GeForce RTX 3080 ofrece un rendimiento de juego sin precedentes.',
+            price: 899.99,
+            thumbnail: 'rtx3080.jpg',
+            code: 'NVDR3080',
+            stock: 50
         });
 
         console.log('ID del nuevo producto:', newProductId);
